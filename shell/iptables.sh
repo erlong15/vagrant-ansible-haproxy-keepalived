@@ -14,9 +14,10 @@ iptables -A INPUT -p tcp --tcp-flags ALL ALL -j DROP
 iptables -A INPUT -i lo -j ACCEPT
 
 #ALLOW PORTs
-iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
-iptables -A INPUT -p tcp -m tcp --dport 443 -j ACCEPT
-iptables -A INPUT -p tcp -m tcp --dport 22 -j ACCEPT
+iptables -I INPUT -p vrrp -m comment --comment "VRRP" -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --dport 80 -m comment --comment "HTTP" -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --dport 443 -m comment --comment "HTTPS" -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --dport 22 -m comment --comment "SSH" -j ACCEPT
 iptables -I INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 
 iptables -P OUTPUT ACCEPT

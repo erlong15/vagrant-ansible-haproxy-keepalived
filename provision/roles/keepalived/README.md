@@ -17,6 +17,7 @@ Install Keepalive on Centos/Red Hat with Ansible
     virtual_router_id: 1
     virtual_ipaddress: 10.0.26.81
     priority: 101
+    secret_passwd: ZcnG9lGUoZeM3nFT
 
 - hosts: keepalived_backup
   user: root
@@ -29,6 +30,7 @@ Install Keepalive on Centos/Red Hat with Ansible
     virtual_router_id: 1
     virtual_ipaddress: 10.0.26.81
     priority: 100
+    secret_passwd: ZcnG9lGUoZeM3nFT
 ```
 
 - In your inventory file:
