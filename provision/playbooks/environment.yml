@@ -1,0 +1,46 @@
+---
+# playbook.yml file.
+- hosts: all
+  user: root
+  become: true
+  become_user: root
+  roles:
+    - common
+
+- hosts: webservers
+  user: root
+  become: true
+  become_user: root
+  roles:
+    - nginx
+
+- hosts: lblservers
+  user: root
+  become: true
+  become_user: root
+  roles:
+    - haproxy
+
+- hosts: keepalived_master
+  user: root
+  become: true
+  become_user: root
+  roles:
+    - keepalived
+  vars:
+    interface: eth1
+    virtual_router_id: 1
+    virtual_ipaddress: 10.0.26.81
+    priority: 101
+
+- hosts: keepalived_backup
+  user: root
+  become: true
+  become_user: root
+  roles:
+    - keepalived
+  vars:
+    interface: eth1
+    virtual_router_id: 1
+    virtual_ipaddress: 10.0.26.81
+    priority: 100
